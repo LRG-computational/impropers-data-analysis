@@ -1,0 +1,97 @@
+LAMMPS (29 Sep 2021 - Update 2)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+units           real
+atom_style      full
+pair_style      lj/cut/coul/cut 10.0 13.4
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  opls
+special_bonds   lj/coul 0 0 0.5
+improper_style  cvff
+pair_modify mix geometric
+dielectric 4.9
+read_data       ./ligpargen_energies/Dimethyl_Naphthalene_Dicarboximide_Phi_40_Theta_10_Thiophene.lmp
+Reading data file ...
+  orthogonal box = (-5.3722300 0.10738000 -9.9129300) to (44.627770 50.107380 40.087070)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  39 atoms
+  scanning bonds ...
+  2 = max bonds/atom
+  scanning angles ...
+  6 = max angles/atom
+  scanning dihedrals ...
+  6 = max dihedrals/atom
+  scanning impropers ...
+  3 = max impropers/atom
+  reading bonds ...
+  43 bonds
+  reading angles ...
+  73 angles
+  reading dihedrals ...
+  108 dihedrals
+  reading impropers ...
+  24 impropers
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0.5     
+  special bond factors coul:  0        0        0.5     
+     4 = max # of 1-2 neighbors
+     7 = max # of 1-3 neighbors
+    18 = max # of 1-4 neighbors
+    18 = max # of special neighbors
+  special bonds CPU = 0.000 seconds
+  read_data CPU = 0.004 seconds
+timestep 1.0
+thermo 1
+thermo_style multi
+neighbor 2.0 bin
+run_style verlet
+run 0
+WARNING: No fixes defined, atoms won't move (src/verlet.cpp:55)
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 15.4
+  ghost atom cutoff = 15.4
+  binsize = 7.7, bins = 7 7 7
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/coul/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 11.65 | 11.65 | 11.65 Mbytes
+---------------- Step        0 ----- CPU =      0.0000 (sec) ----------------
+TotEng   =       180.1247 KinEng   =         0.0000 Temp     =         0.0000 
+PotEng   =       180.1247 E_bond   =        33.4210 E_angle  =        29.8726 
+E_dihed  =         7.5719 E_impro  =         0.8872 E_vdwl   =       124.6330 
+E_coul   =       -16.2609 E_long   =         0.0000 Press    =        65.3810 
+Loop time of 9.416e-06 on 1 procs for 0 steps with 39 atoms
+
+201.8% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 9.416e-06  |            |       |100.00
+
+Nlocal:        39.0000 ave          39 max          39 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:        273.000 ave         273 max         273 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:        625.000 ave         625 max         625 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 625
+Ave neighs/atom = 16.025641
+Ave special neighs/atom = 10.615385
+Neighbor list builds = 0
+Dangerous builds = 0
+Total wall time: 0:00:00

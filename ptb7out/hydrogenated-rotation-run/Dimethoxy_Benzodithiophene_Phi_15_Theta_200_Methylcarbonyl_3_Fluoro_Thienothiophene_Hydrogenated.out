@@ -1,0 +1,622 @@
+You are running Q-Chem version: 5.4.0
+
+#
+# job setting
+#
+local host:  exp-3-51
+current dir: /home/rramji/project-csd799/aromodel/ptb7fout-qchem/hydrogenated-rotation-run
+input file:  Dimethoxy_Benzodithiophene_Phi_15_Theta_200_Methylcarbonyl_3_Fluoro_Thienothiophene_Hydrogenated.qcin
+output file: 
+nprocs     : 1
+nthreads   : 64
+#
+# qchem installation setting
+#
+QC:          /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl
+QCAUX:       /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/qcaux
+QCPROG:      /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/exe/qcprog.exe
+QCPROG_S:    /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/exe/qcprog.exe_s
+PARALLEL:    -DPARALLEL
+QCMPI:       mpich
+#
+# qchem directory setting
+#
+qcrun:       qchem791173
+QCSCRATCH:   .
+QCLOCALSCR:  
+QCTMPDIR:    .
+QCFILEPREF:  ./qchem791173
+QCSAVEDIR:   
+workdirs:    ./qchem791173
+workdir0:    ./qchem791173
+partmpdirs =  
+#
+# parallel setting
+#
+QCRSH:           ssh
+QCMPI:           mpich
+QCMPIRUN:        /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/bin/mpi/mpirun_qchem
+QCMACHINEFILE:   ./qchem791173/hostfile
+exp-3-51
+
+#
+# env setting
+#
+exported envs:   QC QCAUX QCSCRATCH QCRUNNAME QCFILEPREF QCPROG QCPROG_S GUIFILE
+
+Running Job 1 of 1 Dimethoxy_Benzodithiophene_Phi_15_Theta_200_Methylcarbonyl_3_Fluoro_Thienothiophene_Hydrogenated.qcin
+qchem Dimethoxy_Benzodithiophene_Phi_15_Theta_200_Methylcarbonyl_3_Fluoro_Thienothiophene_Hydrogenated.qcin_791173.0 ./qchem791173/ 1
+/cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/bin/mpi/mpirun_qchem -machinefile ./qchem791173/hostfile -np 1 /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/exe/qcprog.exe Dimethoxy_Benzodithiophene_Phi_15_Theta_200_Methylcarbonyl_3_Fluoro_Thienothiophene_Hydrogenated.qcin_791173.0 ./qchem791173/
+
+Process 0 of 1 is on exp-3-51 - thread support 0
+initial socket setup ...start
+initial socket setup ...done 
+now start server 0 ... 
+                  Welcome to Q-Chem
+     A Quantum Leap Into The Future Of Chemistry
+
+
+ Q-Chem 5.4, Q-Chem, Inc., Pleasanton, CA (2021)
+
+ License issued to: University of California, San Diego (site)
+
+ E. Epifanovsky,  A. T. B. Gilbert,  Xintian Feng,  Joonho Lee,  Yuezhi Mao,  
+ N. Mardirossian,  P. Pokhilko,  A. White,  M. Wormit,  M. P. Coons,  
+ A. L. Dempwolff,  Zhengting Gan,  D. Hait,  P. R. Horn,  L. D. Jacobson,  
+ I. Kaliman,  J. Kussmann,  A. W. Lange,  Ka Un Lao,  D. S. Levine,  Jie Liu,  
+ S. C. McKenzie,  A. F. Morrison,  K. Nanda,  F. Plasser,  D. R. Rehn,  
+ M. L. Vidal,  Zhi-Qiang You,  Ying Zhu,  B. Alam,  B. Albrecht,  
+ A. Aldossary,  E. Alguire,  J. H. Andersen,  D. Barton,  K. Begam,  A. Behn,  
+ Y. A. Bernard,  E. J. Berquist,  H. Burton,  A. Carreras,  K. Carter-Fenk,  
+ R. Chakraborty,  A. D. Chien,  K. D. Closser,  V. Cofer-Shabica,  
+ S. Dasgupta,  Jia Deng,  M. de Wergifosse,  M. Diedenhofen,  Hainam Do,  
+ S. Ehlert,  Po-Tung Fang,  S. Fatehi,  Qingguo Feng,  J. Gayvert,  
+ Qinghui Ge,  G. Gidofalvi,  M. Goldey,  J. Gomes,  C. Gonzalez-Espinoza,  
+ S. Gulania,  A. Gunina,  M. W. D. Hanson-Heine,  P. H. P. Harbach,  
+ A. W. Hauser,  M. F. Herbst,  M. Hernandez Vera,  M. Hodecker,  
+ Z. C. Holden,  S. Houck,  Xunkun Huang,  Kerwin Hui,  B. C. Huynh,  
+ M. Ivanov,  Hyunjun Ji,  Hanjie Jiang,  B. Kaduk,  S. Kaehler,  
+ K. Khistyaev,  Jaehoon Kim,  P. Klunzinger,  Z. Koczor-Benda,  
+ Joong Hoon Koh,  D. Kosenkov,  L. Koulias,  T. Kowalczyk,  C. M. Krauter,  
+ K. Kue,  A. Kunitsa,  T. Kus,  A. Landau,  K. V. Lawler,  D. Lefrancois,  
+ S. Lehtola,  Rain Li,  Yi-Pei Li,  Jiashu Liang,  M. Liebenthal,  
+ Hung-Hsuan Lin,  You-Sheng Lin,  Fenglai Liu,  Kuan-Yu Liu,  
+ M. Loipersberger,  A. Luenser,  A. Manjanath,  P. Manohar,  E. Mansoor,  
+ S. F. Manzer,  Shan-Ping Mao,  A. V. Marenich,  T. Markovich,  S. Mason,  
+ S. A. Maurer,  P. F. McLaughlin,  M. F. S. J. Menger,  J.-M. Mewes,  
+ S. A. Mewes,  P. Morgante,  J. W. Mullinax,  T. S. Nguyen-Beck,  
+ K. J. Oosterbaan,  G. Paran,  Alexander C. Paul,  Suranjan K. Paul,  
+ F. Pavosevic,  Zheng Pei,  S. Prager,  E. I. Proynov,  E. Ramos,  B. Rana,  
+ A. E. Rask,  A. Rettig,  R. M. Richard,  F. Rob,  E. Rossomme,  T. Scheele,  
+ M. Scheurer,  M. Schneider,  N. Sergueev,  S. M. Sharada,  W. Skomorowski,  
+ D. W. Small,  C. J. Stein,  Yu-Chuan Su,  E. J. Sundstrom,  Zhen Tao,  
+ J. Thirman,  T. Tsuchimochi,  N. M. Tubman,  S. P. Veccham,  O. Vydrov,  
+ J. Wenzel,  J. Witte,  A. Yamada,  Kun Yao,  S. Yeganeh,  S. R. Yost,  
+ A. Zech,  Igor Ying Zhang,  Xing Zhang,  Yu Zhang,  D. Zuev,  
+ A. Aspuru-Guzik,  A. T. Bell,  N. A. Besley,  K. B. Bravaya,  B. R. Brooks,  
+ D. Casanova,  Jeng-Da Chai,  S. Coriani,  C. J. Cramer,  
+ A. E. DePrince, III,  R. A. DiStasio Jr.,  A. Dreuw,  B. D. Dunietz,  
+ T. R. Furlani,  W. A. Goddard III,  S. Grimme,  S. Hammes-Schiffer,  
+ T. Head-Gordon,  W. J. Hehre,  Chao-Ping Hsu,  T.-C. Jagau,  Yousung Jung,  
+ A. Klamt,  Jing Kong,  D. S. Lambrecht,  WanZhen Liang,  N. J. Mayhall,  
+ C. W. McCurdy,  J. B. Neaton,  C. Ochsenfeld,  J. A. Parkhill,  R. Peverati,  
+ V. A. Rassolov,  Yihan Shao,  L. V. Slipchenko,  T. Stauch,  R. P. Steele,  
+ J. E. Subotnik,  A. J. W. Thom,  A. Tkatchenko,  D. G. Truhlar,  
+ T. Van Voorhis,  T. A. Wesolowski,  K. B. Whaley,  H. L. Woodcock III,  
+ P. M. Zimmerman,  S. Faraji,  P. M. W. Gill,  M. Head-Gordon,  
+ J. M. Herbert,  A. I. Krylov
+
+ Contributors to earlier versions of Q-Chem not listed above: 
+ R. D. Adamson,  B. Austin,  R. Baer,  J. Baker,  G. J. O. Beran,  
+ K. Brandhorst,  S. T. Brown,  E. F. C. Byrd,  A. K. Chakraborty,  
+ G. K. L. Chan,  Chun-Min Chang,  Yunqing Chen,  C.-L. Cheng,  
+ Siu Hung Chien,  D. M. Chipman,  D. L. Crittenden,  H. Dachsel,  
+ R. J. Doerksen,  A. D. Dutoi,  R. G. Edgar,  J. Fosso-Tande,  
+ L. Fusti-Molnar,  D. Ghosh,  A. Ghysels,  A. Golubeva-Zadorozhnaya,  
+ J. Gonthier,  M. S. Gordon,  S. R. Gwaltney,  G. Hawkins,  J. E. Herr,  
+ A. Heyden,  S. Hirata,  E. G. Hohenstein,  G. Kedziora,  F. J. Keil,  
+ C. Kelley,  Jihan Kim,  R. A. King,  R. Z. Khaliullin,  P. P. Korambath,  
+ W. Kurlancheek,  A. Laurent,  A. M. Lee,  M. S. Lee,  S. V. Levchenko,  
+ Ching Yeh Lin,  D. Liotard,  E. Livshits,  R. C. Lochan,  I. Lotan,  
+ L. A. Martinez-Martinez,  P. E. Maslen,  N. Nair,  D. P. O'Neill,  
+ D. Neuhauser,  E. Neuscamman,  C. M. Oana,  R. Olivares-Amaya,  R. Olson,  
+ T. M. Perrine,  B. Peters,  P. A. Pieniazek,  A. Prociuk,  Y. M. Rhee,  
+ J. Ritchie,  M. A. Rohrdanz,  E. Rosta,  N. J. Russ,  H. F. Schaefer III,  
+ M. W. Schmidt,  N. E. Schultz,  S. Sharma,  N. Shenvi,  C. D. Sherrill,  
+ A. C. Simmonett,  A. Sodt,  T. Stein,  D. Stuck,  K. S. Thanthiriwatte,  
+ V. Vanovschi,  L. Vogt,  Tao Wang,  A. Warshel,  M. A. Watson,  
+ C. F. Williams,  Q. Wu,  X. Xu,  Jun Yang,  W. Zhang,  Yan Zhao
+
+ Please cite Q-Chem as follows:
+ Y. Shao et al., Mol. Phys. 113, 184-215 (2015)
+ DOI: 10.1080/00268976.2014.952696
+
+ Q-Chem 5.4.0 for Intel X86 EM64T Linux
+
+ Parts of Q-Chem use Armadillo 9.800.1 (Horizon Scraper).
+ http://arma.sourceforge.net/
+
+ Q-Chem begins on Tue Jan  9 11:45:06 2024  
+
+ Host: 
+0
+
+     Scratch files written to ./qchem791173//
+ May1621 |scratch|qcdevops|jenkins|workspace|build_RNUM    
+ Parallel job on  1  processors
+ Processing $rem in /cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.0/qchem-5.4-akfmr7b3t57bfs6qan3padb2wnb2i7cl/config/preferences:
+ Processing $rem in /home/rramji/.qchemrc:
+ Symmetry turned off for PCM/SM12/SMD calculation
+ Core orbitals will be frozen
+
+ Checking the input file for inconsistencies... 	...done.
+
+ Q-Chem warning in module forms1/BasisType.C, line 2236:
+
+ You are not using the predefined 5D/6D in this basis set.
+
+
+--------------------------------------------------------------
+User input:
+--------------------------------------------------------------
+$molecule
+0 1
+C	0.147685	-8.517702	-0.284919
+C	-0.212552	-7.641575	0.728574
+S	0.661757	-7.638634	-1.745304
+C	-0.083761	-6.264785	0.374824
+H	-0.565513	-7.966081	1.715621
+C	0.405665	-6.072714	-0.965104
+C	0.574617	-4.787049	-1.502136
+C	-0.413763	-5.162801	1.214687
+C	-0.248748	-3.874817	0.675870
+C	0.243888	-3.683952	-0.664513
+O	-0.838511	-5.499772	2.464209
+O	1.000176	-4.459055	-2.757750
+C	1.893778	-5.329063	-3.441858
+H	2.284868	-4.755694	-4.303826
+H	1.383341	-6.238095	-3.828743
+H	2.741817	-5.637262	-2.792824
+C	-1.586168	-4.572261	3.241222
+H	-1.974033	-5.139743	4.108274
+H	-2.441448	-4.153131	2.668916
+H	-0.954660	-3.739531	3.620041
+C	0.369302	-2.306654	-1.015668
+S	-0.517367	-2.306501	1.453394
+C	0.000000	-1.435185	0.000000
+H	0.724300	-1.978138	-2.000559
+C	0.000000	0.000000	0.000000
+S	0.234628	0.873813	1.507541
+C	0.640889	2.392969	0.718873
+C	0.234815	0.873434	-1.067872
+C	0.592377	2.216811	-0.686410
+S	0.174526	0.637422	-2.805516
+C	0.622551	2.330840	-3.054530
+C	0.803505	3.015647	-1.862551
+F	1.144815	4.307994	-1.819088
+C	0.740334	2.763108	-4.456084
+O	0.548793	2.017428	-5.406510
+O	1.082665	4.069544	-4.569225
+C	1.215848	4.546407	-5.916207
+H	1.494066	5.611729	-5.833064
+H	0.261736	4.436296	-6.470168
+H	2.000108	3.981294	-6.459293
+H	0.878739	3.286099	1.306486
+H	-0.699838	-9.143623	-0.588198
+H	0.992270	-9.149441	0.014470
+H	-1.017360	-1.443175	-0.362373
+$end
+
+$rem
+JOBTYPE		SP
+EXCHANGE	HF
+CORRELATION	pRIMP2
+BASIS		cc-pvtz
+METHOD		rimp2
+AUX_BASIS	rimp2-cc-pvtz
+SOLVENT_METHOD	PCM
+PURECART	11111
+SYMMETRY	false
+MEM_TOTAL	110000
+SCF_CONVERGENCE = 6
+THRESH=10
+GUI = 2
+$end
+
+
+
+$solvent
+dielectric 4.90
+$end
+--------------------------------------------------------------
+ ----------------------------------------------------------------
+             Standard Nuclear Orientation (Angstroms)
+    I     Atom           X                Y                Z
+ ----------------------------------------------------------------
+    1      C       0.1476850000    -8.5177020000    -0.2849190000
+    2      C      -0.2125520000    -7.6415750000     0.7285740000
+    3      S       0.6617570000    -7.6386340000    -1.7453040000
+    4      C      -0.0837610000    -6.2647850000     0.3748240000
+    5      H      -0.5655130000    -7.9660810000     1.7156210000
+    6      C       0.4056650000    -6.0727140000    -0.9651040000
+    7      C       0.5746170000    -4.7870490000    -1.5021360000
+    8      C      -0.4137630000    -5.1628010000     1.2146870000
+    9      C      -0.2487480000    -3.8748170000     0.6758700000
+   10      C       0.2438880000    -3.6839520000    -0.6645130000
+   11      O      -0.8385110000    -5.4997720000     2.4642090000
+   12      O       1.0001760000    -4.4590550000    -2.7577500000
+   13      C       1.8937780000    -5.3290630000    -3.4418580000
+   14      H       2.2848680000    -4.7556940000    -4.3038260000
+   15      H       1.3833410000    -6.2380950000    -3.8287430000
+   16      H       2.7418170000    -5.6372620000    -2.7928240000
+   17      C      -1.5861680000    -4.5722610000     3.2412220000
+   18      H      -1.9740330000    -5.1397430000     4.1082740000
+   19      H      -2.4414480000    -4.1531310000     2.6689160000
+   20      H      -0.9546600000    -3.7395310000     3.6200410000
+   21      C       0.3693020000    -2.3066540000    -1.0156680000
+   22      S      -0.5173670000    -2.3065010000     1.4533940000
+   23      C       0.0000000000    -1.4351850000     0.0000000000
+   24      H       0.7243000000    -1.9781380000    -2.0005590000
+   25      C       0.0000000000     0.0000000000     0.0000000000
+   26      S       0.2346280000     0.8738130000     1.5075410000
+   27      C       0.6408890000     2.3929690000     0.7188730000
+   28      C       0.2348150000     0.8734340000    -1.0678720000
+   29      C       0.5923770000     2.2168110000    -0.6864100000
+   30      S       0.1745260000     0.6374220000    -2.8055160000
+   31      C       0.6225510000     2.3308400000    -3.0545300000
+   32      C       0.8035050000     3.0156470000    -1.8625510000
+   33      F       1.1448150000     4.3079940000    -1.8190880000
+   34      C       0.7403340000     2.7631080000    -4.4560840000
+   35      O       0.5487930000     2.0174280000    -5.4065100000
+   36      O       1.0826650000     4.0695440000    -4.5692250000
+   37      C       1.2158480000     4.5464070000    -5.9162070000
+   38      H       1.4940660000     5.6117290000    -5.8330640000
+   39      H       0.2617360000     4.4362960000    -6.4701680000
+   40      H       2.0001080000     3.9812940000    -6.4592930000
+   41      H       0.8787390000     3.2860990000     1.3064860000
+   42      H      -0.6998380000    -9.1436230000    -0.5881980000
+   43      H       0.9922700000    -9.1494410000     0.0144700000
+   44      H      -1.0173600000    -1.4431750000    -0.3623730000
+ ----------------------------------------------------------------
+ Nuclear Repulsion Energy =        3343.36642113 hartrees
+ There are      120 alpha and      120 beta electrons
+ Requested basis set is cc-pVTZ
+ There are 388 shells and 1096 basis functions
+
+ Total QAlloc Memory Limit 110000 MB
+ Mega-Array Size       188 MB
+ MEM_STATIC part       192 MB
+ Discretize the solute cavity surface with Lebedev spheres
+	Using 110 Lebedev grid points for each H atom
+	Using 194 Lebedev grid points for other atoms
+	Atomic van der Waals radii will be scaled by 1.20
+ Remove points where switching function is < 1.0e-08
+ Keep 2970 surface tesserae and discard 4306 interior tesserae
+ Molecular Surface Area = 438.634 Angst**2
+ Requested basis set is rimp2-cc-pVTZ
+ There are 853 shells and 2963 basis functions
+ A cutoff of  1.0D-10 yielded  33093 shell pairs
+ There are    249837 function pairs (    323198 Cartesian)
+ Smallest overlap matrix eigenvalue = 2.05E-05
+
+ Scale SEOQF with 1.000000e-01/1.000000e-02/1.000000e-02
+
+ Standard Electronic Orientation quadrupole field applied
+ Nucleus-field energy     =     0.0000000214 hartrees
+ Guess from superposition of atomic densities
+ Warning:  Energy on first SCF cycle will be non-variational
+ SAD guess density has 240.000000 electrons
+
+ -----------------------------------------------------------------------
+  General SCF calculation program by
+  Eric Jon Sundstrom, Paul Horn, Yuezhi Mao, Dmitri Zuev, Alec White,
+  David Stuck, Shaama M.S., Shane Yost, Joonho Lee, David Small,
+  Daniel Levine, Susi Lehtola, Hugh Burton, Evgeny Epifanovsky,
+  Bang C. Huynh
+ -----------------------------------------------------------------------
+ Hartree-Fock
+ using 64 threads for integral computing
+ -------------------------------------------------------
+ OpenMP Integral computing Module                
+ Release: version 1.0, May 2013, Q-Chem Inc. Pittsburgh 
+ -------------------------------------------------------
+ A restricted SCF calculation will be
+ performed using DIIS
+ SCF converges when DIIS error is below 1.0e-06
+ ---------------------------------------
+  Cycle       Energy         DIIS error
+ ---------------------------------------
+    1   -2767.0341282342      1.75e-02  
+    2   -2754.8860772597      1.53e-03  
+    3   -2755.2348136713      8.57e-04  
+    4   -2755.3221809816      2.56e-04  
+    5   -2755.3358454970      7.39e-05  
+    6   -2755.3373952413      2.60e-05  
+    7   -2755.3378002169      1.36e-05  
+    8   -2755.3379306367      5.65e-06  
+    9   -2755.3379610519      2.96e-06  
+   10   -2755.3379685616      1.52e-06  
+   11   -2755.3379711986      8.37e-07  Convergence criterion met
+ ---------------------------------------
+ SCF time:   CPU 7946.62s  wall 302.00s 
+
+************** Final PCM Free Energy Summary **************
+ G_electrostatic  =      -0.01981608 hartree =     -12.43477495 kcal/mol
+ G_cavitation     =       0.00000000 hartree =       0.00000000 kcal/mol
+ G_dispersion     =       0.00000000 hartree =       0.00000000 kcal/mol
+ G_repulsion      =       0.00000000 hartree =       0.00000000 kcal/mol
+ --------------------------------------------------
+ Non-electrostatic Free Energy =       0.00000000 hartree =       0.00000000 kcal/mol
+ Total                         =      -0.01981608 hartree =     -12.43477495 kcal/mol
+ --------------------------------------------------
+ SCF Energy (H0 + V/2)                       =   -2755.33797120 
+ Solute Internal Energy (H0)                 =   -2755.31815512 
+ Total Free Energy (H0 + V/2 + non-elec)     =   -2755.33797120 hartree
+                                             = -1729000.67273305 kcal/mol
+***********************************************************
+
+ SCF   energy in the final basis set =    -2755.3379711986
+ Total energy in the final basis set =    -2755.3379711986
+
+
+ --------------------------------------------------------------
+  Generalized many-body perturbation theory program
+  by Joonho Lee, Fazle Rob, Xintian Feng, Evgeny Epifanovsky
+
+ No regularization used 
+ (reg. param. = 0.0000e+00)
+  (P|Q)^-1/2 Time:  CPU 290.49 s  wall 5.14 s
+
+ In RI-MP2 calculation: 
+ # of frozen core orbitals: 45
+
+ Components of the RIMP2 correlation energy:
+        aaaa    correlation energy =        -0.6695497015 a.u.
+        abab    correlation energy =        -3.7530667762 a.u.
+        bbbb    correlation energy =        -0.6695497015 a.u.
+        non-Brillouin singles      =        -0.0000000000 a.u.
+        total same-spin energy     =        -1.3390994030 a.u.
+        total opposite-spin energy =        -3.7530667762 a.u.
+
+ Total  RIMP2   correlation energy =        -5.0921661791 a.u.
+        RIMP2         total energy =     -2760.4301373777 a.u.
+
+ RI-MP2 Energy Time:  CPU 3194.23 s  wall 52.35 s
+ 
+ --------------------------------------------------------------
+ 
+                    Orbital Energies (a.u.)
+ --------------------------------------------------------------
+ 
+ Alpha MOs
+ -- Occupied --
+-92.0142 -91.9977 -91.9824 -91.9590 -26.3432 -20.6151 -20.5890 -20.5874
+-20.5616 -11.4097 -11.3821 -11.3106 -11.3099 -11.3090 -11.3021 -11.2984
+-11.2944 -11.2890 -11.2859 -11.2855 -11.2850 -11.2833 -11.2826 -11.2741
+-11.2738 -11.2602 -11.2594 -11.2507 -11.2393  -9.0129  -8.9978  -8.9845
+ -8.9616  -6.6937  -6.6931  -6.6926  -6.6789  -6.6782  -6.6770  -6.6657
+ -6.6648  -6.6636  -6.6429  -6.6419  -6.6409  -1.6602  -1.4676  -1.4122
+ -1.4093  -1.3703  -1.2303  -1.2033  -1.1750  -1.1374  -1.1015  -1.0480
+ -1.0455  -1.0235  -1.0045  -0.9992  -0.9629  -0.9595  -0.9495  -0.9410
+ -0.8954  -0.8710  -0.8648  -0.8091  -0.8016  -0.7903  -0.7846  -0.7687
+ -0.7573  -0.7376  -0.7251  -0.7105  -0.6995  -0.6941  -0.6849  -0.6814
+ -0.6741  -0.6640  -0.6572  -0.6493  -0.6389  -0.6314  -0.6210  -0.6155
+ -0.6123  -0.5985  -0.5937  -0.5774  -0.5716  -0.5655  -0.5601  -0.5543
+ -0.5462  -0.5355  -0.5312  -0.5283  -0.5137  -0.5095  -0.5086  -0.5021
+ -0.4853  -0.4823  -0.4771  -0.4739  -0.4701  -0.4663  -0.4621  -0.4480
+ -0.4327  -0.3950  -0.3869  -0.3716  -0.3503  -0.2989  -0.2892  -0.2183
+ -- Virtual --
+  0.0335   0.0533   0.1135   0.1254   0.1375   0.1444   0.1525   0.1556
+  0.1576   0.1600   0.1660   0.1713   0.1796   0.1857   0.1900   0.1968
+  0.1998   0.2025   0.2049   0.2149   0.2202   0.2224   0.2231   0.2271
+  0.2289   0.2387   0.2435   0.2459   0.2515   0.2546   0.2653   0.2731
+  0.2846   0.2923   0.3048   0.3237   0.3294   0.3334   0.3439   0.3469
+  0.3532   0.3580   0.3631   0.3712   0.3766   0.3777   0.3843   0.3847
+  0.3874   0.3933   0.3996   0.4077   0.4097   0.4143   0.4183   0.4248
+  0.4265   0.4314   0.4332   0.4400   0.4428   0.4475   0.4511   0.4560
+  0.4603   0.4623   0.4648   0.4730   0.4740   0.4790   0.4842   0.4862
+  0.4937   0.4951   0.4980   0.5001   0.5014   0.5073   0.5179   0.5188
+  0.5215   0.5283   0.5324   0.5336   0.5340   0.5409   0.5421   0.5460
+  0.5496   0.5557   0.5582   0.5591   0.5594   0.5678   0.5769   0.5792
+  0.5862   0.5879   0.5936   0.5980   0.5982   0.6073   0.6106   0.6128
+  0.6133   0.6144   0.6198   0.6214   0.6230   0.6239   0.6284   0.6285
+  0.6336   0.6344   0.6408   0.6442   0.6470   0.6517   0.6544   0.6569
+  0.6615   0.6696   0.6726   0.6833   0.6884   0.6909   0.6970   0.6990
+  0.7071   0.7107   0.7154   0.7171   0.7190   0.7273   0.7314   0.7383
+  0.7441   0.7526   0.7569   0.7606   0.7663   0.7742   0.7811   0.7856
+  0.7975   0.8005   0.8062   0.8118   0.8189   0.8199   0.8217   0.8257
+  0.8327   0.8390   0.8453   0.8527   0.8560   0.8645   0.8683   0.8728
+  0.8782   0.8886   0.8928   0.8956   0.8992   0.9017   0.9098   0.9204
+  0.9222   0.9304   0.9363   0.9375   0.9396   0.9477   0.9526   0.9560
+  0.9630   0.9655   0.9737   0.9782   0.9816   0.9845   0.9859   0.9911
+  0.9923   1.0001   1.0063   1.0095   1.0160   1.0186   1.0287   1.0339
+  1.0372   1.0396   1.0494   1.0516   1.0560   1.0616   1.0645   1.0695
+  1.0739   1.0786   1.0827   1.0862   1.0948   1.0992   1.1044   1.1098
+  1.1145   1.1158   1.1236   1.1263   1.1290   1.1382   1.1467   1.1509
+  1.1532   1.1565   1.1641   1.1708   1.1712   1.1754   1.1810   1.1839
+  1.1881   1.1905   1.1973   1.1991   1.2111   1.2150   1.2181   1.2215
+  1.2229   1.2264   1.2334   1.2353   1.2457   1.2520   1.2537   1.2578
+  1.2612   1.2646   1.2684   1.2764   1.2794   1.2866   1.2880   1.2935
+  1.2982   1.3018   1.3087   1.3173   1.3250   1.3339   1.3361   1.3379
+  1.3469   1.3576   1.3602   1.3672   1.3748   1.3821   1.3912   1.3989
+  1.4044   1.4109   1.4119   1.4231   1.4263   1.4356   1.4471   1.4541
+  1.4573   1.4695   1.4745   1.4799   1.4834   1.4881   1.4970   1.5023
+  1.5032   1.5087   1.5120   1.5145   1.5216   1.5311   1.5337   1.5403
+  1.5429   1.5436   1.5507   1.5563   1.5585   1.5598   1.5700   1.5781
+  1.5816   1.5969   1.6032   1.6123   1.6144   1.6258   1.6273   1.6402
+  1.6439   1.6466   1.6520   1.6580   1.6680   1.6729   1.6788   1.6840
+  1.6924   1.6955   1.7067   1.7132   1.7237   1.7294   1.7344   1.7495
+  1.7577   1.7660   1.7784   1.7880   1.7919   1.7993   1.8070   1.8144
+  1.8209   1.8220   1.8318   1.8417   1.8507   1.8653   1.8697   1.8732
+  1.8840   1.8902   1.8931   1.9049   1.9172   1.9233   1.9314   1.9425
+  1.9440   1.9529   1.9573   1.9684   1.9769   1.9935   1.9958   1.9996
+  2.0027   2.0156   2.0200   2.0303   2.0332   2.0427   2.0497   2.0585
+  2.0642   2.0730   2.0837   2.0935   2.0989   2.1102   2.1128   2.1183
+  2.1377   2.1455   2.1581   2.1690   2.1768   2.1815   2.1885   2.1942
+  2.2005   2.2032   2.2118   2.2162   2.2263   2.2285   2.2373   2.2378
+  2.2494   2.2533   2.2637   2.2663   2.2676   2.2784   2.2864   2.2936
+  2.3036   2.3101   2.3258   2.3310   2.3405   2.3485   2.3542   2.3620
+  2.3721   2.3800   2.3829   2.4005   2.4010   2.4137   2.4201   2.4251
+  2.4308   2.4403   2.4432   2.4662   2.4753   2.4828   2.4863   2.4898
+  2.5052   2.5118   2.5163   2.5287   2.5362   2.5468   2.5592   2.5618
+  2.5664   2.5797   2.5949   2.6046   2.6152   2.6176   2.6221   2.6234
+  2.6263   2.6333   2.6362   2.6443   2.6475   2.6548   2.6621   2.6722
+  2.6791   2.6823   2.6850   2.6915   2.7020   2.7035   2.7111   2.7154
+  2.7186   2.7214   2.7385   2.7422   2.7470   2.7525   2.7578   2.7692
+  2.7749   2.7830   2.7948   2.7976   2.8044   2.8114   2.8178   2.8235
+  2.8384   2.8436   2.8478   2.8524   2.8556   2.8669   2.8697   2.8705
+  2.8749   2.8846   2.8914   2.8940   2.9086   2.9160   2.9251   2.9405
+  2.9488   2.9530   2.9576   2.9636   2.9718   2.9778   2.9808   2.9910
+  2.9963   3.0022   3.0082   3.0155   3.0233   3.0335   3.0385   3.0444
+  3.0544   3.0646   3.0674   3.0767   3.0817   3.0882   3.0931   3.0993
+  3.1053   3.1081   3.1090   3.1195   3.1250   3.1297   3.1373   3.1453
+  3.1488   3.1511   3.1533   3.1574   3.1609   3.1663   3.1697   3.1763
+  3.1845   3.1888   3.1967   3.2062   3.2089   3.2173   3.2181   3.2236
+  3.2268   3.2332   3.2440   3.2497   3.2509   3.2554   3.2598   3.2679
+  3.2690   3.2730   3.2778   3.2805   3.2849   3.2927   3.2959   3.3005
+  3.3035   3.3073   3.3175   3.3243   3.3260   3.3296   3.3371   3.3441
+  3.3460   3.3486   3.3517   3.3535   3.3577   3.3629   3.3652   3.3688
+  3.3748   3.3771   3.3846   3.3903   3.3937   3.3980   3.4007   3.4036
+  3.4106   3.4131   3.4269   3.4274   3.4319   3.4348   3.4371   3.4467
+  3.4511   3.4527   3.4605   3.4626   3.4667   3.4738   3.4771   3.4791
+  3.4847   3.4867   3.4925   3.4960   3.5028   3.5129   3.5261   3.5294
+  3.5358   3.5453   3.5456   3.5512   3.5556   3.5646   3.5684   3.5763
+  3.5804   3.5863   3.5905   3.5985   3.5986   3.6020   3.6049   3.6087
+  3.6129   3.6156   3.6229   3.6267   3.6342   3.6405   3.6426   3.6516
+  3.6602   3.6661   3.6703   3.6781   3.6818   3.6855   3.6862   3.6942
+  3.6998   3.7040   3.7055   3.7098   3.7119   3.7194   3.7230   3.7352
+  3.7374   3.7416   3.7433   3.7506   3.7647   3.7688   3.7695   3.7739
+  3.7775   3.7816   3.7865   3.7975   3.8011   3.8080   3.8100   3.8175
+  3.8194   3.8207   3.8273   3.8336   3.8431   3.8496   3.8519   3.8571
+  3.8618   3.8677   3.8742   3.8777   3.8841   3.8931   3.8933   3.9091
+  3.9128   3.9158   3.9249   3.9292   3.9387   3.9495   3.9505   3.9592
+  3.9632   3.9657   3.9710   3.9832   3.9917   3.9956   4.0102   4.0139
+  4.0213   4.0303   4.0326   4.0362   4.0462   4.0530   4.0622   4.0664
+  4.0678   4.0730   4.0783   4.0886   4.0997   4.1058   4.1139   4.1286
+  4.1356   4.1430   4.1482   4.1589   4.1653   4.1673   4.1698   4.1722
+  4.1777   4.1883   4.1960   4.2012   4.2096   4.2151   4.2295   4.2357
+  4.2447   4.2518   4.2546   4.2663   4.2745   4.2852   4.2949   4.3093
+  4.3115   4.3210   4.3269   4.3387   4.3418   4.3470   4.3527   4.3589
+  4.3693   4.3735   4.3816   4.3844   4.3929   4.4042   4.4115   4.4179
+  4.4239   4.4254   4.4303   4.4338   4.4365   4.4410   4.4479   4.4559
+  4.4676   4.4792   4.4853   4.4920   4.5050   4.5164   4.5181   4.5261
+  4.5333   4.5468   4.5561   4.5619   4.5663   4.5704   4.5773   4.5815
+  4.5936   4.5967   4.6184   4.6193   4.6301   4.6413   4.6441   4.6505
+  4.6553   4.6701   4.6784   4.6840   4.6953   4.7069   4.7236   4.7307
+  4.7440   4.7511   4.7619   4.7749   4.7854   4.7958   4.8102   4.8193
+  4.8241   4.8320   4.8399   4.8569   4.8578   4.8704   4.8756   4.8870
+  4.9037   4.9218   4.9362   4.9458   4.9537   4.9596   4.9678   4.9795
+  4.9879   4.9984   5.0082   5.0088   5.0194   5.0343   5.0438   5.0543
+  5.0625   5.0914   5.0947   5.1068   5.1216   5.1301   5.1468   5.1637
+  5.1729   5.1906   5.2025   5.2047   5.2266   5.2321   5.2510   5.2545
+  5.2568   5.2612   5.2758   5.2880   5.2924   5.3158   5.3241   5.3297
+  5.3366   5.3461   5.3523   5.3642   5.3727   5.3797   5.3948   5.3965
+  5.4050   5.4157   5.4261   5.4347   5.4427   5.4848   5.4990   5.5097
+  5.5173   5.5195   5.5227   5.5340   5.5654   5.5715   5.5831   5.5872
+  5.5954   5.6080   5.6146   5.6214   5.6393   5.6613   5.6724   5.6901
+  5.7058   5.7371   5.7495   5.7645   5.7835   5.8073   5.8178   5.8433
+  5.8579   5.8800   5.9083   5.9174   5.9289   5.9580   6.0001   6.0121
+  6.0386   6.0429   6.1013   6.1339   6.1471   6.1503   6.1718   6.1750
+  6.1808   6.1967   6.2466   6.2499   6.2612   6.2664   6.2786   6.2868
+  6.2930   6.3120   6.3519   6.4231   6.4499   6.4584   6.5074   6.5392
+  6.5521   6.5695   6.6066   6.6488   6.6613   6.6709   6.7141   6.7469
+  6.8091   6.8301   6.8556   6.8594   6.8982   6.9786   7.1309   7.1437
+  7.2037   7.2071   7.2205   7.2405   7.3096   7.3286   7.3407   7.3633
+  7.3644   7.4064   7.4131   7.4843   7.4858   7.4976   7.5256   7.5513
+  7.6165   7.7335   7.7731   7.7904   7.8021   7.9022   7.9267   7.9541
+  7.9736   8.1347   8.2670   8.6208   8.9222   9.0319   9.3632   9.4875
+  9.6775  10.2405  11.1765  11.4601  11.7537  11.9252  12.1270  12.3798
+ 12.4258  12.5074  12.9256  13.0270  13.0752  13.1726  13.3871  13.4835
+ 13.7372  13.7843  13.8803  13.9393  14.0309  14.3109  15.1453  15.3163
+ --------------------------------------------------------------
+ 
+          Ground-State Mulliken Net Atomic Charges
+
+     Atom                 Charge (a.u.)
+  ----------------------------------------
+      1 C                    -0.070606
+      2 C                    -0.254366
+      3 S                    -0.133314
+      4 C                    -0.049998
+      5 H                     0.194097
+      6 C                    -0.050428
+      7 C                     0.221852
+      8 C                     0.234597
+      9 C                    -0.075387
+     10 C                    -0.030668
+     11 O                    -0.333940
+     12 O                    -0.343228
+     13 C                    -0.083263
+     14 H                     0.121123
+     15 H                     0.092409
+     16 H                     0.092851
+     17 C                    -0.088309
+     18 H                     0.124865
+     19 H                     0.093287
+     20 H                     0.090210
+     21 C                    -0.331575
+     22 S                    -0.094317
+     23 C                     0.139047
+     24 H                     0.200412
+     25 C                    -0.038063
+     26 S                     0.088864
+     27 C                    -0.219647
+     28 C                    -0.024308
+     29 C                    -0.098739
+     30 S                    -0.001736
+     31 C                    -0.161893
+     32 C                     0.406044
+     33 F                    -0.207120
+     34 C                     0.442835
+     35 O                    -0.460651
+     36 O                    -0.300560
+     37 C                    -0.058524
+     38 H                     0.121553
+     39 H                     0.095170
+     40 H                     0.095156
+     41 H                     0.216386
+     42 H                     0.118229
+     43 H                     0.115871
+     44 H                     0.205783
+  ----------------------------------------
+  Sum of atomic charges =     0.000000
+
+ -----------------------------------------------------------------
+                    Cartesian Multipole Moments
+ -----------------------------------------------------------------
+    Charge (ESU x 10^10)
+                -0.0000
+    Dipole Moment (Debye)
+         X      -0.0730      Y       1.7605      Z       3.0151
+       Tot       3.4923
+    Quadrupole Moments (Debye-Ang)
+        XX    -193.5018     XY       5.3397     YY    -172.1498
+        XZ     -11.2019     YZ     -11.4596     ZZ    -195.1035
+    Octopole Moments (Debye-Ang^2)
+       XXX    -170.5966    XXY     352.1747    XYY     -48.1895
+       YYY     945.9970    XXZ     181.8364    XYZ      28.0381
+       YYZ     160.2081    XZZ     -30.6161    YZZ     423.1306
+       ZZZ     607.1927
+    Hexadecapole Moments (Debye-Ang^3)
+      XXXX    -893.5109   XXXY    -179.1894   XXYY   -3860.0335
+      XYYY     -64.6762   YYYY  -20028.7792   XXXZ     834.4818
+      XXYZ     338.6052   XYYZ       0.9592   YYYZ     464.8998
+      XXZZ   -1272.2020   XYZZ      77.5774   YYZZ   -4317.0268
+      XZZZ     580.4373   YZZZ     489.3408   ZZZZ   -7303.1603
+ -----------------------------------------------------------------
+ Total job time:  377.16s(wall), 11436.46s(cpu) 
+ Tue Jan  9 11:51:23 2024
+
+        *************************************************************
+        *                                                           *
+        *  Thank you very much for using Q-Chem.  Have a nice day.  *
+        *                                                           *
+        *************************************************************
+
+
+0 sent ACK to 0 
+now end server 0 ... 
+cleanup process ... done
+remove work dirs ./qchem791173.0 -- ./qchem791173.0
+rm -rf ./qchem791173.0
+rm -rf ./qchem791173

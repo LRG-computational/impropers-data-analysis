@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name="PTB7_Input.txt_Dimethoxy_Benzodithiophene_1_Optimize_Monomer"
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH -t 1:0:00
+#SBATCH -A csd672
+#SBATCH --mail-type=ALL
+# cd /expanse/lustre/projects/csd626/rramji/aromodel/impropers-p3ht/Optimized_Monomers
+
+module add cpu/0.15.4
+module add gcc/9.2.0
+module add openmpi/3.1.6
+module add orca/4.2.1
+orca PTB7_Input.txt_Dimethoxy_Benzodithiophene_1_Optimize_Monomer.inp >> PTB7_Input.txt_Dimethoxy_Benzodithiophene_1_Optimize_Monomer.out
