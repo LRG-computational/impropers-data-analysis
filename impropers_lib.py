@@ -2,6 +2,10 @@ import os
 import re
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+molecules_data = []
+
 
 # Define a function for parsing QChem outfiles with structured naming scheme
 def extract_qchem_energies(path, filename_pattern, energy_pattern):
@@ -128,3 +132,32 @@ def update_lammps_data(lammps_file, new_coords, output_file):
             else:
                 f_out.write(line)
 
+# showing all the energy barriers
+def show_energy_barriers(molecules_data):
+    
+    colors = ['blue', 'green', 'red', 'orange']
+    
+    plt.figure(figsize=(10, 6))
+
+    for (sorted_deloc, phis, name), color in zip(molecules_data, colors):
+        barriers = []
+        phis_used = []
+        for phi in phis:
+            if phi <= 30:
+                subset = sorted_deloc[sorted_deloc['Phi'] == phi]
+                e_conjugation = subset[subset['Theta'] == 0]['E_meth'].iloc[0]
+                normed_energy = 627.509 * (subset['E_deloc'] - e_conjugation)  # Normalize energy
+                normed_energy = normed_energy - 689  # Further normalize energy
+                max_energy = np.max(normed_energy)
+                min_energy = np.min(normed_energy)
+                phis_used.append(phi)
+                barriers.append(max_energy - min_energy)
+        plt.plot(phis_used, barriers, color=color, label=name)
+
+    plt.xlabel('Improper Angle (degrees)')
+    plt.ylabel('Torsional Barrier (kcal/mol)')
+    plt.title('Torsional Barriers for Multiple Molecules (Phi <= 30)')
+    plt.legend()
+    plt.show()
+
+show_energy_barriers()
