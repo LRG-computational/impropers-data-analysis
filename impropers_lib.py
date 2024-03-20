@@ -3,9 +3,33 @@ import re
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import csv
+import pickle
 
 molecules_data = []
+with open('./ptb7out/data.pkl', 'rb') as file:
+    data = pickle.load(file)
+    sorted_deloc = data['sorted_deloc']
+    phis = data['phis']
+    molecules_data.append((sorted_deloc, phis, "PTB7OUT"))
 
+with open('./ptb7in/data.pkl', 'rb') as file:
+    data = pickle.load(file)
+    sorted_deloc = data['sorted_deloc']
+    phis = data['phis']
+    molecules_data.append((sorted_deloc, phis, "PTB7IN"))
+
+with open('./pndit/data.pkl', 'rb') as file:
+    data = pickle.load(file)
+    sorted_deloc = data['sorted_deloc']
+    phis = data['phis']
+    molecules_data.append((sorted_deloc, phis, "PNDIT"))
+
+with open('./p3ht/data.pkl', 'rb') as file:
+    data = pickle.load(file)
+    sorted_deloc = data['sorted_deloc']
+    phis = data['phis']
+    molecules_data.append((sorted_deloc, phis, "P3HT"))
 
 # Define a function for parsing QChem outfiles with structured naming scheme
 def extract_qchem_energies(path, filename_pattern, energy_pattern):
@@ -160,4 +184,4 @@ def show_energy_barriers(molecules_data):
     plt.legend()
     plt.show()
 
-show_energy_barriers()
+show_energy_barriers(molecules_data)
