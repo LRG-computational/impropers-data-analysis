@@ -180,48 +180,41 @@ def graph_molecule_data2(molecules_data, rotated_shape):
     plt.tight_layout()
     plt.show()
 
-def graph_molecule_data3(molecules_data, rotated_shape):
+def graph_molecule_data3(molecules_data, rotated_shape, index):
     fig, ax = plt.subplots(figsize=(7, 8))
     cmap = mpl.colormaps["coolwarm"]
     color = np.linspace(0.0, 1.0, rotated_shape[1])
 
 
-    for index, data in enumerate(molecules_data):
-        if index > 3:
-            break
+    data = molecules_data[index]
 
-        if data:
-            try:
-                data = data[0]['E_deloc']
-                x = np.linspace(0, 350, len(data))
-                y = np.array(data)
-                min_value = np.min(y)
-                y = y - min_value
-                
-                labels = ['ptb7out', 'ptb7in', 'pndit', 'p3ht']
-                label = labels[index] if index < len(labels) else f"Molecule {index + 1}"
-                ax.scatter(x, y, color=cmap(color[index % len(color)]), label=label)
+    if data:
+        try:
+            data = data[index]['E_deloc']
+            x = np.linspace(0, 350, len(data))
+            y = np.array(data)
+            min_value = np.min(y)
+            y = y - min_value
+            
+            labels = ['ptb7out', 'ptb7in', 'pndit', 'p3ht']
+            label = labels[index] if index < len(labels) else f"Molecule {index + 1}"
+            ax.scatter(x, y, color=cmap(color[0 % len(color)]), label=label)
 
-                # 6 for 6th order
-                guess = [0] * (2 * 6 + 1)  
-                params, _= curve_fit(lambda x, *params: fourier_series1(x, *params),x, y, p0=guess)
+            # 6 for 6th order
+            guess = [0] * (2 * 6 + 1)  
+            params, _= curve_fit(lambda x, *params: fourier_series1(x, *params),x, y, p0=guess)
 
-                x_fit = np.linspace(0, 350, 400)
-                y_fit = fourier_series1(x_fit, *params)
-                ax.plot(x_fit, y_fit, color='black', alpha=0.7, linewidth=2)
-                
-            except Exception as e:
-                print(f"Skipping dataset at index {index} due to error: {e}")
-                continue
+            x_fit = np.linspace(0, 350, 400)
+            y_fit = fourier_series1(x_fit, *params)
+            ax.plot(x_fit, y_fit, color='black', alpha=0.7, linewidth=2)
+            
+        except Exception as e:
+            print(f"Skipping dataset at index {index} due to error: {e}")
 
     ax.set_xlabel('Dihedral Angle ($^\circ$)', size=24)
     ax.set_ylabel('Energy (kcal/mol)', size=24)
-    if index > -1:  
-        ax.legend()
-    else:
-        print("No data was suitable for plotting.")
-
+    
     plt.tight_layout()
     plt.show()
 
-graph_molecule_data3(molecules_data, (0, 10))
+graph_molecule_data3(molecules_data, (0, 10),0)
