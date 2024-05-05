@@ -6,6 +6,8 @@ import matplotlib as mpl
 import scipy
 import pandas as pd
 from scipy.optimize import curve_fit
+from matplotlib.colors import Normalize
+
 
 
 """This is the script used to generate Figures 7 and 8 (absolute improper torsional barrier and improper/dihedral comparison, respectively)"""
@@ -217,4 +219,87 @@ def graph_molecule_data3(molecules_data, rotated_shape, index):
     plt.tight_layout()
     plt.show()
 
-graph_molecule_data3(molecules_data, (0, 10),0)
+#graph_molecule_data3(molecules_data, (0, 10),0)
+
+# Define the Fourier series function
+def fourier_series(theta, *coefficients):
+    a0 = coefficients[0]
+    result = a0 / 2  # a0/2 represents the constant offset
+    n_harmonics = len(coefficients[1:]) // 2
+    for n in range(n_harmonics):
+        a_n = coefficients[2*n + 1]
+        b_n = coefficients[2*n + 2]
+        result += a_n * np.cos((n + 1) * theta) + b_n * np.sin((n + 1) * theta)
+    return result
+
+
+# Your existing plotting function modified to include Fourier series fitting
+def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
+    min_e = np.min(rimp2_df[0]['E_deloc'])
+    fig, axs = plt.subplots(1, 2, figsize=(16, 6))
+
+    for i, ax in enumerate(axs.flatten()):
+        for phi in phis:
+            if phi <= 30:
+                subset = rimp2_df[0][rimp2_df[0]['Phi'] == phi]
+                theta = np.radians(subset['Theta'])  # Convert to radians if theta is in degrees
+                if i == 0:
+                    energy = 627.509 * (subset['E_deloc'] - min_e)
+                else:
+                    energy = subset['E_tot'] - (subset['E_hyd'] - subset['E_meth'])
+                    energy = 627.509 * (energy - -629.5025)
+                
+                color = cmap(norm(phi))
+                ax.scatter(subset['Theta'], energy, color=color, label=f"Phi={phi}")
+
+                # Fit the Fourier series
+                n_harmonics = 6  # Define the number of harmonics
+                coeffs_guess = [0] * (1 + 2 * n_harmonics)  # Initial guesses (a0, a1, b1, ..., an, bn)
+                fitted_params, _ = curve_fit(fourier_series, theta, energy, p0=coeffs_guess)
+
+                # Generate the fitted curve
+                theta_fitted = np.linspace(min(theta), max(theta), 200)
+                fitted_energy = fourier_series(theta_fitted, *fitted_params)
+
+                # Convert radians back to degrees if needed
+                theta_fitted_degrees = np.degrees(theta_fitted)
+                ax.plot(theta_fitted_degrees, fitted_energy, color='black', linewidth=2, linestyle='--', label='Fitted Curve')
+
+        ax.set_xlabel('Theta (degrees)', fontdict=axes)
+        ax.set_ylabel('Energy (arbitrary units)', fontdict=axes)
+        ax.set_title(f'Plot {i+1}: Energy vs Theta for Phi <= 30', fontdict=title)
+        if i == 0:
+            ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1), borderaxespad=0.)
+
+    plt.tight_layout()
+    plt.show()
+
+# Assuming you have the required data and variables set up, call the function
+
+phis = [0,5,10,15,20,25,30]
+
+axes = {
+    'fontname': 'Arial',  
+    'size': 12,           
+    'weight': 'bold'      
+}
+
+title = {
+    'fontname': 'Arial',
+    'size': 14,
+    'weight': 'bold'
+}
+cmap = plt.cm.viridis
+
+min_phi = min(phis) 
+max_phi = max(phis)
+norm = Normalize(vmin=min_phi, vmax=max_phi)
+
+# ptb7out
+plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
+# ptb7in
+plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
+# pndit
+plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
+# p3ht
+plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
