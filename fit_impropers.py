@@ -232,6 +232,12 @@ def fourier_series(theta, *coefficients):
         result += a_n * np.cos((n + 1) * theta) + b_n * np.sin((n + 1) * theta)
     return result
 
+def opls_dihedral(theta, V1, V2, V3, V4):
+    """ OPLS dihedral potential function """
+    return (V1 / 2) * (1 + np.cos(theta)) + \
+           (V2 / 2) * (1 - np.cos(2 * theta)) + \
+           (V3 / 2) * (1 + np.cos(3 * theta)) + \
+           (V4 / 2) * (1 - np.cos(4 * theta))
 
 # Your existing plotting function modified to include Fourier series fitting
 def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
@@ -296,11 +302,7 @@ max_phi = max(phis)
 norm = Normalize(vmin=min_phi, vmax=max_phi)
 
 
-def opls_dihedral(theta, V1, V2, V3):
-    """ OPLS dihedral potential function """
-    return (V1 / 2) * (1 + np.cos(theta)) + \
-           (V2 / 2) * (1 - np.cos(2 * theta)) + \
-           (V3 / 2) * (1 + np.cos(3 * theta))
+
 
 def plot_with_opls_fits(rimp2_df, phis, cmap, norm, axes, title):
     min_e = np.min(rimp2_df[0]['E_deloc'])
@@ -321,7 +323,7 @@ def plot_with_opls_fits(rimp2_df, phis, cmap, norm, axes, title):
                 ax.scatter(subset['Theta'], energy, color=color, label=f"Phi={phi}")
 
                 # Fit the OPLS dihedral function
-                coeffs_guess = [0, 0, 0]  # Initial guesses (V1, V2, V3)
+                coeffs_guess = [0, 0, 0, 0]  # Initial guesses (V1, V2, V3)
                 fitted_params, _ = curve_fit(opls_dihedral, theta, energy, p0=coeffs_guess)
 
                 # Generate the fitted curve
@@ -343,15 +345,16 @@ def plot_with_opls_fits(rimp2_df, phis, cmap, norm, axes, title):
 
 
 # ptb7out
-# plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
+plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
 # ptb7in
-# plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
+plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
 # pndit
-# plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
+plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
 # p3ht
-# plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
+plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
 
+'''
 plot_with_opls_fits(molecules_data[0], phis, cmap, norm, axes, title)
 plot_with_opls_fits(molecules_data[1], phis, cmap, norm, axes, title)
 plot_with_opls_fits(molecules_data[2], phis, cmap, norm, axes, title)
-plot_with_opls_fits(molecules_data[3], phis, cmap, norm, axes, title)
+plot_with_opls_fits(molecules_data[3], phis, cmap, norm, axes, title)'''
