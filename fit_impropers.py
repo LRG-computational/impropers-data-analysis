@@ -295,11 +295,60 @@ min_phi = min(phis)
 max_phi = max(phis)
 norm = Normalize(vmin=min_phi, vmax=max_phi)
 
+
+def opls_dihedral(theta, V1, V2, V3):
+    """ OPLS dihedral potential function """
+    return (V1 / 2) * (1 + np.cos(theta)) + \
+           (V2 / 2) * (1 - np.cos(2 * theta)) + \
+           (V3 / 2) * (1 + np.cos(3 * theta))
+
+def plot_with_opls_fits(rimp2_df, phis, cmap, norm, axes, title):
+    min_e = np.min(rimp2_df[0]['E_deloc'])
+    fig, axs = plt.subplots(1, 2, figsize=(16, 6))
+
+    for i, ax in enumerate(axs.flatten()):
+        for phi in phis:
+            if phi <= 30:
+                subset = rimp2_df[0][rimp2_df[0]['Phi'] == phi]
+                theta = np.radians(subset['Theta'])  # Convert to radians if theta is in degrees
+                if i == 0:
+                    energy = 627.509 * (subset['E_deloc'] - min_e)
+                else:
+                    energy = subset['E_tot'] - (subset['E_hyd'] - subset['E_meth'])
+                    energy = 627.509 * (energy - -629.5025)
+                
+                color = cmap(norm(phi))
+                ax.scatter(subset['Theta'], energy, color=color, label=f"Phi={phi}")
+
+                # Fit the OPLS dihedral function
+                coeffs_guess = [0, 0, 0]  # Initial guesses (V1, V2, V3)
+                fitted_params, _ = curve_fit(opls_dihedral, theta, energy, p0=coeffs_guess)
+
+                # Generate the fitted curve
+                theta_fitted = np.linspace(min(theta), max(theta), 200)
+                fitted_energy = opls_dihedral(theta_fitted, *fitted_params)
+
+                # Convert radians back to degrees if needed
+                theta_fitted_degrees = np.degrees(theta_fitted)
+                ax.plot(theta_fitted_degrees, fitted_energy, color='black', linewidth=2, linestyle='--', label='Fitted Curve')
+
+        ax.set_xlabel('Theta (degrees)', fontdict=axes)
+        ax.set_ylabel('Energy (arbitrary units)', fontdict=axes)
+        ax.set_title(f'Plot {i+1}: OPLS Energy vs Theta for Phi <= 30', fontdict=title)
+        if i == 0:
+            ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1), borderaxespad=0.)
+
+    plt.tight_layout()
+    plt.show()
+
+
 # ptb7out
-plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
 # ptb7in
-plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
 # pndit
-plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
 # p3ht
-plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
+
+plot_with_opls_fits(molecules_data[0], phis, cmap, norm, axes, title)
