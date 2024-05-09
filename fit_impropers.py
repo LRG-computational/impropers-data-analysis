@@ -352,3 +352,6 @@ def plot_with_opls_fits(rimp2_df, phis, cmap, norm, axes, title):
 # plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
 
 plot_with_opls_fits(molecules_data[0], phis, cmap, norm, axes, title)
+plot_with_opls_fits(molecules_data[1], phis, cmap, norm, axes, title)
+plot_with_opls_fits(molecules_data[2], phis, cmap, norm, axes, title)
+plot_with_opls_fits(molecules_data[3], phis, cmap, norm, axes, title)
