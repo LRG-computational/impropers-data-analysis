@@ -6,7 +6,7 @@ import matplotlib as mpl
 import scipy
 import pandas as pd
 from scipy.optimize import curve_fit
-from matplotlib.colors import Normalize
+from matplotlib.colors import LinearSegmentedColormap, Normalize
 
 
 
@@ -243,6 +243,8 @@ def opls_dihedral(theta, V1, V2, V3, V4):
 def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
     min_e = np.min(rimp2_df[0]['E_deloc'])
     fig, axs = plt.subplots(1, 2, figsize=(16, 6))
+    colors = ["#00008B","#ADD8E6", "#E0FFFF",  "#FF474C", "#8B0000"]  
+    cmap = LinearSegmentedColormap.from_list("CustomCmap", colors)
 
     for i, ax in enumerate(axs.flatten()):
         for phi in phis:
@@ -269,11 +271,10 @@ def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
 
                 # Convert radians back to degrees if needed
                 theta_fitted_degrees = np.degrees(theta_fitted)
-                ax.plot(theta_fitted_degrees, fitted_energy, color='black', linewidth=2, linestyle='--', label='Fitted Curve')
+                ax.plot(theta_fitted_degrees, fitted_energy, color=color, linewidth=2, linestyle='-', label='Fitted Curve')
 
-        ax.set_xlabel('Theta (degrees)', fontdict=axes)
-        ax.set_ylabel('Energy (arbitrary units)', fontdict=axes)
-        ax.set_title(f'Plot {i+1}: Energy vs Theta for Phi <= 30', fontdict=title)
+        ax.set_xlabel('Dihedral Angle (degrees)', fontdict=axes)
+        ax.set_ylabel('Energy (kcal/mol)', fontdict=axes)
         if i == 0:
             ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1), borderaxespad=0.)
 
