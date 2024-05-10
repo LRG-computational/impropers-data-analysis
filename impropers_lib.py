@@ -156,41 +156,28 @@ def update_lammps_data(lammps_file, new_coords, output_file):
             else:
                 f_out.write(line)
 
-# showing all the energy barriers
 def show_energy_barriers(molecules_data):
-    
-    colors = ['blue', 'green', 'red', 'orange']
-    
-    plt.figure(figsize=(10, 6))
+    colors = ['orange', 'green', 'red', 'blue']
+    plt.figure(figsize=(8, 6))
 
     for (sorted_deloc, phis, name), color in zip(molecules_data, colors):
         barriers = []
         phis_used = []
         for phi in phis:
             if phi <= 30:
-                # original 
                 subset = sorted_deloc[sorted_deloc['Phi'] == phi]
                 e_conjugation = subset[subset['Theta'] == 0]['E_meth'].iloc[0]
                 
-                # changes made in pndit trying to reflect in graph
                 max1 = subset['E_deloc'][subset['Theta'] == 90].values[0]
                 max2 = subset['E_deloc'][subset['Theta'] == 270].values[0]
                 min = subset['E_deloc'][subset['Theta'] == 0].values[0]
-                barrier = ((max1 - min) + (max2 - min))/2
-
-                # original
-                normed_energy = 627.509 * (subset['E_deloc'] - e_conjugation)  # Normalize energy
-                normed_energy = normed_energy - 689  # Further normalize energy
-                max_energy = np.max(normed_energy)
-                min_energy = np.min(normed_energy)
-                #phis_used.append(phi)
-                #barriers.append(max_energy - min_energy)
-
+                barrier = ((max1 - min) + (max2 - min)) / 2
 
                 phis_used.append(phi)
-                barriers.append(barrier*627.509)
+                barriers.append(barrier * 627.509)  # Normalization factor for energy
 
-        plt.plot(phis_used, barriers, color=color, label=name)
+        plt.plot(phis_used, barriers, color=color, label=name, linewidth=4) 
+        plt.scatter(phis_used, barriers, color=color, edgecolor='black', facecolor=color, marker='s',s=100, linewidth=1.5)
 
     plt.xlabel('Improper Angle (degrees)')
     plt.ylabel('Torsional Barrier (kcal/mol)')
