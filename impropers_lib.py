@@ -185,4 +185,36 @@ def show_energy_barriers(molecules_data):
     plt.legend()
     plt.show()
 
-show_energy_barriers(molecules_data)
+def show_energy_barriers_kj_mol(molecules_data):
+    colors = ['orange', 'green', 'red', 'blue']
+    plt.figure(figsize=(8, 6))
+
+    conversion_factor = 2625.5
+
+    for (sorted_deloc, phis, name), color in zip(molecules_data, colors):
+        barriers = []
+        phis_used = []
+        for phi in phis:
+            if phi <= 30:
+                subset = sorted_deloc[sorted_deloc['Phi'] == phi]
+                e_conjugation = subset[subset['Theta'] == 0]['E_meth'].iloc[0]
+                
+                max1 = subset['E_deloc'][subset['Theta'] == 90].values[0]
+                max2 = subset['E_deloc'][subset['Theta'] == 270].values[0]
+                min_energy = subset['E_deloc'][subset['Theta'] == 0].values[0]
+                barrier = ((max1 - min_energy) + (max2 - min_energy)) / 2
+
+                phis_used.append(phi)
+                barriers.append(barrier * conversion_factor)  
+
+        plt.plot(phis_used, barriers, color=color, label=name, linewidth=4)
+        plt.scatter(phis_used, barriers, color=color, edgecolor='black', facecolor=color, marker='s', s=100, linewidth=1.5)
+
+    plt.xlabel('Improper Angle (degrees)')
+    plt.ylabel('Torsional Barrier (kJ/mol)')
+    plt.title('Torsional Barriers for Multiple Molecules (Phi <= 30)')
+    plt.legend()
+    plt.show()
+
+
+show_energy_barriers_kj_mol(molecules_data)
