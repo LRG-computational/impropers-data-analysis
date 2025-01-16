@@ -246,6 +246,8 @@ def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
     colors = ["#00008B","#ADD8E6", "#E0FFFF",  "#FF474C", "#8B0000"]  
     cmap = LinearSegmentedColormap.from_list("CustomCmap", colors)
 
+    data_to_save = []
+
     for i, ax in enumerate(axs.flatten()):
         for phi in phis:
             if phi <= 30:
@@ -259,6 +261,7 @@ def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
                 
                 color = cmap(norm(phi))
                 ax.scatter(subset['Theta'], energy, color=color, label=f"Phi={phi}")
+                data_to_save.extend(list(zip(subset['Phi'], subset['Theta'], energy)))
 
                 # Fit the Fourier series
                 n_harmonics = 6  # Define the number of harmonics
@@ -280,6 +283,9 @@ def plot_with_fourier_fits(rimp2_df, phis, cmap, norm, axes, title):
 
     plt.tight_layout()
     plt.show()
+
+    data_df = pd.DataFrame(data_to_save, columns=['Phi', 'Theta', 'E_deloc'])
+    data_df.to_csv('p3mt.csv', index=False)
 
 # Assuming you have the required data and variables set up, call the function
 
@@ -346,11 +352,11 @@ def plot_with_opls_fits(rimp2_df, phis, cmap, norm, axes, title):
 
 
 # ptb7out
-plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[0], phis, cmap, norm, axes, title)
 # ptb7in
-plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[1], phis, cmap, norm, axes, title)
 # pndit
-plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
+# plot_with_fourier_fits(molecules_data[2], phis, cmap, norm, axes, title)
 # p3ht
 plot_with_fourier_fits(molecules_data[3], phis, cmap, norm, axes, title)
 

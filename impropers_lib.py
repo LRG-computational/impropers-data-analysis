@@ -216,5 +216,32 @@ def show_energy_barriers_kj_mol(molecules_data):
     plt.legend()
     plt.show()
 
+import pandas as pd
+import numpy as np
 
-show_energy_barriers_kj_mol(molecules_data)
+# Constants
+conversion_factor = 627.509
+reference_energy = -629.5025  # Energy in Hartree, adjust as necessary
+print ((molecules_data[0][0]['E_tot'] - (molecules_data[0][0]['E_hyd'] - molecules_data[0][0]['E_meth'])))
+# Assuming molecules_data is populated as shown in your earlier message
+for sorted_deloc, phis, name in molecules_data:
+    rows = []
+    for phi in phis:
+        subset = sorted_deloc[sorted_deloc['Phi'] == phi]
+        min_e = np.min(subset['E_deloc'])  # Assuming minimum energy calculation is per Phi subset
+        for theta in subset['Theta'].unique():
+            subset_theta = subset[subset['Theta'] == theta]
+            if not subset_theta.empty:
+                e_deloc = subset_theta['E_deloc'].iloc[0]
+                # Assuming 'E_tot', 'E_hyd', 'E_meth' are columns in your data
+                energy = subset_theta['E_tot'].iloc[0] - (subset_theta['E_hyd'].iloc[0] - subset_theta['E_meth'].iloc[0])
+                adjusted_energy = conversion_factor * (energy - reference_energy)
+                rows.append({'Phi': phi, 'Theta': theta, 'E_deloc': adjusted_energy})
+    
+    # Create DataFrame from rows
+    df = pd.DataFrame(rows)
+    
+    # Save to CSV
+    csv_path = f'{name}.csv'
+    df.to_csv(csv_path, index=False)
+    print(f'CSV file saved: {csv_path}')
